@@ -171,16 +171,3 @@ resource "null_resource" "configure-cat-app" {
       host     = "${azurerm_public_ip.catapp-pip.fqdn}"
     }
   }
-module "web_app_container" {
-   source = "app.terraform.io/ant_telus/web-app-container/azurerm"
-   version = "2.2.1" 
-   name = "${var.prefix}"
-   port = "80"
-   https_only = "false"
-   resource_group_name = "${azurerm_resource_group.myresourcegroup.name}"
-   container_type = "docker"
-   container_image = "scarolan/palacearcade"
-}
-output "container_app_url" {
-   value = "http://${module.web_app_container.hostname}"
-}
